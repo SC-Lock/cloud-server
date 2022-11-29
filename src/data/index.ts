@@ -1,5 +1,3 @@
 import SqliteDoorRepository from './sqlite-door-repository';
 
-export {
-  SqliteDoorRepository
-};
+export { SqliteDoorRepository };
