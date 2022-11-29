@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 
 const app = express();
 
-app.use('/api/door', routers.DoorRouter);
+app.use('/api/doors', routers.DoorRouter);
 
 app.listen(PORT, () => {
     console.log(`App is listening on port ${PORT}`);

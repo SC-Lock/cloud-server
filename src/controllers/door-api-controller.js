@@ -10,17 +10,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getDoor = void 0;
+const errors_1 = require("../errors");
 const services_1 = require("../services");
 function getDoor(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const doorId = parseInt(req.params.doorId);
-        const door = yield services_1.DoorService.retrieveDoor(doorId);
-        if (door) {
+        try {
+            const doorId = parseInt(req.params.doorId);
             res.status(200)
-                .send(door);
+                .send(yield services_1.DoorService.retrieveDoor(doorId));
         }
-        res.status(404)
-            .send(`The door with ID ${doorId} was not found.`);
+        catch (err) {
+            if (err instanceof errors_1.NotFoundError) {
+                res.status(400)
+                    .send(err.message);
+            }
+        }
     });
 }
 exports.getDoor = getDoor;

@@ -1,16 +1,19 @@
 import {Request, Response} from 'express';
 
+import {NotFoundError} from '../errors';
 import {DoorService} from '../services';
 
 export async function getDoor(req: Request, res: Response): Promise<void> {
-    const doorId = parseInt(req.params.doorId);
-    const door = await DoorService.retrieveDoor(doorId);
-    if (door) {
+    try {
+        const doorId = parseInt(req.params.doorId);
         res.status(200)
-            .send(door);
+            .send(await DoorService.retrieveDoor(doorId));
+    } catch (err) {
+        if (err instanceof NotFoundError) {
+            res.status(400)
+                .send(err.message);
+        }
     }
-    res.status(404)
-        .send(`The door with ID ${doorId} was not found.`)
 }
 
 export default {

@@ -8,7 +8,7 @@ const express_1 = __importDefault(require("express"));
 const routers_1 = __importDefault(require("./routers"));
 const PORT = process.env.PORT || 3000;
 const app = (0, express_1.default)();
-app.use('/api/door', routers_1.default.DoorRouter);
+app.use('/api/doors', routers_1.default.DoorRouter);
 app.listen(PORT, () => {
     console.log(`App is listening on port ${PORT}`);
 });

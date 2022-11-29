@@ -1,13 +1,17 @@
 import {PrismaClient} from '@prisma/client';
 
+import {NotFoundError} from '../errors';
+
 const prisma = new PrismaClient();
 
-export function readDoor(doorId: number) { // TODO add return type
-    return prisma.door.findUnique({
+export async function readDoor(doorId: number) { // TODO type
+    const door = await prisma.door.findUnique({
        where: {
-           id: doorId
+           id: doorId,
        }
     });
+    if (!door) throw new NotFoundError(doorId);
+    return door;
 }
 
 export default {

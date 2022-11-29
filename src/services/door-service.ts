@@ -1,6 +1,6 @@
 import {SqliteDoorRepository} from '../data';
 
-export function retrieveDoor(doorId: number) { // TODO add return type
+export function retrieveDoor(doorId: number) { // TODO type
     return SqliteDoorRepository.readDoor(doorId);
 }
 
