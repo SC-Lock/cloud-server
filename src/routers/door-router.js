@@ -8,4 +8,4 @@ const express_1 = __importDefault(require("express"));
 const controllers_1 = require("../controllers");
 const router = express_1.default.Router();
 exports.router = router;
-router.get('/hello-world', controllers_1.DoorApiController.helloWorld);
+router.get('/:doorId', controllers_1.DoorApiController.getDoor);
