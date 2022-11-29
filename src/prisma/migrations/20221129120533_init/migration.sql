@@ -1,0 +1,18 @@
+-- CreateTable
+CREATE TABLE "Door" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "unlockCode" TEXT NOT NULL,
+    "isLocked" BOOLEAN NOT NULL,
+    "lockAt" TEXT NOT NULL,
+    "unlockAt" TEXT NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "DoorLog" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "doorId" INTEGER NOT NULL,
+    "isLocked" BOOLEAN NOT NULL,
+    "isAutomatic" BOOLEAN NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "DoorLog_doorId_fkey" FOREIGN KEY ("doorId") REFERENCES "Door" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);

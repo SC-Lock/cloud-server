@@ -14,8 +14,8 @@ model Door {
     id         Int       @id @default(autoincrement())
     unlockCode String
     isLocked   Boolean
-    lockAt     DateTime
-    unlockAt   DateTime
+    lockAt     String
+    unlockAt   String
     doorLogs   DoorLog[]
 }
 
