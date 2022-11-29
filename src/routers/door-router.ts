@@ -4,6 +4,9 @@ import { DoorApiController } from '../controllers';
 
 const router = express.Router();
 
-router.get('/:doorId', DoorApiController.getDoor);
+router
+    .route('/:doorId')
+    .get(DoorApiController.getDoor)
+    .put(DoorApiController.putDoor);
 
 export { router };

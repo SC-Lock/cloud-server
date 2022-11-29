@@ -1,20 +1,32 @@
 import { PrismaClient } from '@prisma/client';
 
-import { NotFoundError } from '../errors';
+import { Door } from '../models';
+import { validateDoorExistence } from '../services';
 
 const prisma = new PrismaClient();
 
 export async function readDoor(doorId: number) {
     // TODO type
-    const door = await prisma.door.findUnique({
+    await validateDoorExistence(doorId);
+    return prisma.door.findUnique({
         where: {
             id: doorId,
         },
     });
-    if (!door) throw new NotFoundError(doorId);
-    return door;
+}
+
+export async function updateDoor(doorId: number, door: Door) {
+    // TODO return type
+    await validateDoorExistence(doorId);
+    return prisma.door.update({
+        where: {
+            id: doorId,
+        },
+        data: door,
+    });
 }
 
 export default {
     readDoor,
+    updateDoor,
 };
