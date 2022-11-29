@@ -6,6 +6,4 @@ const router = express.Router();
 
 router.get('/hello-world', DoorApiController.helloWorld);
 
-export {
-    router
-};
+export { router };

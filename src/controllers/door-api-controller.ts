@@ -1,11 +1,9 @@
-import {Request, Response} from 'express';
+import { Request, Response } from 'express';
 
 export function helloWorld(req: Request, res: Response) {
-    res.status(200)
-        .send('Hello, World!');
-
+    res.status(200).send('Hello, World!');
 }
 
 export default {
-    helloWorld
+    helloWorld,
 };

@@ -1,5 +1,5 @@
-import {router} from './door-router';
+import { router } from './door-router';
 
 export default {
-    DoorRouter: router
-}
+    DoorRouter: router,
+};
