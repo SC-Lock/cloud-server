@@ -11,15 +11,19 @@ datasource db {
 }
 
 model Door {
-    id       Int     @id @default(autoincrement())
-    isClosed Boolean
-    doorLogs DoorLog[]
+    id         Int       @id @default(autoincrement())
+    unlockCode String
+    isLocked   Boolean
+    lockAt     DateTime
+    unlockAt   DateTime
+    doorLogs   DoorLog[]
 }
 
 model DoorLog {
-    id        Int      @id @default(autoincrement())
-    door      Door     @relation(fields: [doorId], references: [id])
-    doorId    Int
-    isClosed  Boolean
-    createdAt DateTime @default(now())
+    id          Int      @id @default(autoincrement())
+    door        Door     @relation(fields: [doorId], references: [id])
+    doorId      Int
+    isLocked    Boolean
+    isAutomatic Boolean
+    createdAt   DateTime @default(now())
 }
