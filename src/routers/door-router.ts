@@ -6,6 +6,4 @@ const router = express.Router();
 
 router.get('/:doorId', DoorApiController.getDoor);
 
-export {
-    router
-};
+export { router };

@@ -11,4 +11,4 @@ app.use('/api/doors', routers.DoorRouter);
 
 app.listen(PORT, () => {
     console.log(`App is listening on port ${PORT}`);
-})
+});
