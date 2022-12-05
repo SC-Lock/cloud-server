@@ -7,6 +7,6 @@ const router = express.Router();
 router
     .route('/:doorId')
     .get(DoorApiController.getDoor)
-    .put(DoorApiController.putDoor);
+    .patch(DoorApiController.putDoor);
 
 export { router };

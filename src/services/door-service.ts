@@ -7,7 +7,7 @@ export function retrieveDoor(doorId: number) {
     return SqliteDoorRepository.readDoor(doorId);
 }
 
-export async function modifyDoor(doorId: number, door: Door) {
+export async function modifyDoor(doorId: number, door: any) {
     // TODO return type
     const updatedDoor = await SqliteDoorRepository.updateDoor(doorId, door);
     MqttService.publishDoor(door);

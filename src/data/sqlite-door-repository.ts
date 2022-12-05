@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 
-import { Door } from '../models';
+import { InvalidRequestBodyError } from '../errors';
 import { validateDoorExistence } from '../services';
 
 const prisma = new PrismaClient();
@@ -15,15 +15,19 @@ export async function readDoor(doorId: number) {
     });
 }
 
-export async function updateDoor(doorId: number, door: Door) {
+export async function updateDoor(doorId: number, door: any) {
     // TODO return type
     await validateDoorExistence(doorId);
-    return prisma.door.update({
-        where: {
-            id: doorId,
-        },
-        data: door,
-    });
+    try {
+        return await prisma.door.update({
+            where: {
+                id: doorId,
+            },
+            data: door,
+        });
+    } catch (e) {
+        throw new InvalidRequestBodyError();
+    }
 }
 
 export default {
