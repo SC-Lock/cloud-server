@@ -2,7 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 
 import routers from './routers';
-import Mqtt from './mqtt';
+import { MqttService } from './services';
 
 const PORT = process.env.EXPRESS_PORT || 3000;
 
@@ -16,4 +16,4 @@ app.listen(PORT, () => {
     console.info(`App is listening on port ${PORT}.`);
 });
 
-Mqtt.init();
+MqttService.init();

@@ -7,7 +7,6 @@ declare global {
             DB_FILE: string;
             MQTT_USERNAME: string;
             MQTT_PWD: string;
-            MQTT_TOPIC: string;
         }
     }
 }
