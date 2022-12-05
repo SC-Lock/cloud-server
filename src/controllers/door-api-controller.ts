@@ -20,8 +20,8 @@ export async function getDoor(req: Request, res: Response): Promise<void> {
 
 export async function putDoor(req: Request, res: Response): Promise<void> {
     try {
-        const door = req.body;
-        const updatedDoor = await DoorService.modifyDoor(getDoorId(req), door);
+        const doorProps = req.body;
+        const updatedDoor = await DoorService.modifyDoor(getDoorId(req), doorProps);
         res.status(200).send(updatedDoor);
     } catch (e) {
         if (e instanceof InvalidRequestBodyError) {

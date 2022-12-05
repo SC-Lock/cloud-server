@@ -1,5 +1,6 @@
 import { Door } from '../models';
 import { client } from '../mqtt';
+import { DoorService } from './index'
 
 const EVT_CONNECT = 'connect';
 const EVT_LISTEN = 'message';
@@ -18,9 +19,16 @@ export function init(): void {
 }
 
 export function handleMsgs(): void {
-    // TODO NYI
     client.on(EVT_LISTEN, (topic: string, msg: string) => {
-        console.log('Received msg:', topic, msg.toString());
+        if (topic === CLIENT_TOPIC) {
+            try {
+                const doorProps = JSON.parse(msg);
+                const doorId = doorProps.id;
+                DoorService.modifyDoor(doorId, doorProps);
+            } catch (e) {
+                console.log('Failed to update the door.');
+            }
+        }
     });
 }
 

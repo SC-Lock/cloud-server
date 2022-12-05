@@ -15,7 +15,7 @@ export async function readDoor(doorId: number) {
     });
 }
 
-export async function updateDoor(doorId: number, door: any) {
+export async function updateDoor(doorId: number, doorProps: any) {
     // TODO return type
     await validateDoorExistence(doorId);
     try {
@@ -23,7 +23,7 @@ export async function updateDoor(doorId: number, door: any) {
             where: {
                 id: doorId,
             },
-            data: door,
+            data: doorProps,
         });
     } catch (e) {
         throw new InvalidRequestBodyError();
