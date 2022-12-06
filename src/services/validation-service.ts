@@ -11,5 +11,5 @@ export async function validateDoorExistence(doorId: number) {
             id: doorId,
         },
     });
-    if (!door) throw new NotFoundError(doorId);
+    if (!door) throw new NotFoundError('door', doorId);
 }

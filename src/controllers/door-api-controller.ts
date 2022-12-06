@@ -1,17 +1,15 @@
 import { Request, Response } from 'express';
 
 import { InvalidRequestBodyError, NotFoundError } from '../errors';
+import { Helpers } from './index';
 import { DoorService } from '../services';
-
-function getDoorId(req: Request): number {
-    return parseInt(req.params.doorId);
-}
 
 export async function getDoor(req: Request, res: Response): Promise<void> {
     try {
-        res.status(200).send(await DoorService.retrieveDoor(getDoorId(req)));
+        res.status(200).send(
+            await DoorService.retrieveDoor(Helpers.getDoorId(req))
+        );
     } catch (e) {
-        console.error(e);
         if (e instanceof NotFoundError) {
             res.status(404).send(e.message);
         }
@@ -21,7 +19,10 @@ export async function getDoor(req: Request, res: Response): Promise<void> {
 export async function putDoor(req: Request, res: Response): Promise<void> {
     try {
         const doorProps = req.body;
-        const updatedDoor = await DoorService.modifyDoor(getDoorId(req), doorProps);
+        const updatedDoor = await DoorService.modifyDoor(
+            Helpers.getDoorId(req),
+            doorProps
+        );
         res.status(200).send(updatedDoor);
     } catch (e) {
         if (e instanceof InvalidRequestBodyError) {

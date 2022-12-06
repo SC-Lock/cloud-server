@@ -2,7 +2,7 @@ import { SqliteDoorRepository } from '../data';
 import { MqttService } from './index';
 
 export function retrieveDoor(doorId: number) {
-    // TODO type
+    // TODO return type
     return SqliteDoorRepository.readDoor(doorId);
 }
 
