@@ -1,5 +1,7 @@
-import { router } from './door-router';
+import DoorRouter from './door-router';
+import DoorLogRouter from './door-log-router';
 
 export default {
-    DoorRouter: router,
+    DoorRouter: DoorRouter.router,
+    DoorLogRouter: DoorLogRouter.router,
 };
