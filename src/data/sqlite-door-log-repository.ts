@@ -6,7 +6,6 @@ import { validateDoorExistence } from '../services';
 const prisma = new PrismaClient();
 
 export async function readDoorLogs(doorId: number) {
-    // TODO return type
     await validateDoorExistence(doorId);
     return await prisma.doorLog.findMany({
         where: {
@@ -16,7 +15,6 @@ export async function readDoorLogs(doorId: number) {
 }
 
 export async function createDoorLog(doorLogCreateObject: DoorLogCreate) {
-    // TODO return type
     try {
         return await prisma.doorLog.create({
             data: doorLogCreateObject,

@@ -6,7 +6,6 @@ import { validateDoorExistence } from '../services';
 const prisma = new PrismaClient();
 
 export async function readDoor(doorId: number) {
-    // TODO type
     await validateDoorExistence(doorId);
     return prisma.door.findUnique({
         where: {
@@ -16,7 +15,6 @@ export async function readDoor(doorId: number) {
 }
 
 export async function updateDoor(doorId: number, doorProps: any) {
-    // TODO return type
     await validateDoorExistence(doorId);
     try {
         return await prisma.door.update({
