@@ -11,6 +11,13 @@ export async function readDoorLogs(doorId: number) {
         where: {
             doorId: doorId,
         },
+        select: {
+            id: true,
+            isLocked: true,
+            isAutomatic: true,
+            createdAt: true,
+            door: true,
+        },
     });
 }
 
