@@ -2,14 +2,14 @@ import { Request, Response } from 'express';
 
 import { NotFoundError } from '../errors';
 import { Helpers } from './index';
-import { DoorLogService } from '../services';
+import { DoorLogService, DoorService } from '../services';
 
 export async function getDashboard(req: Request, res: Response): Promise<void> {
     try {
+        const doorId = Helpers.getDoorId(req);
         res.render('dashboard', {
-            doorLogs: await DoorLogService.retrieveDoorLogs(
-                Helpers.getDoorId(req)
-            ),
+            door: await DoorService.retrieveDoor(doorId),
+            doorLogs: await DoorLogService.retrieveDoorLogs(doorId),
         });
     } catch (e) {
         if (e instanceof NotFoundError) {
