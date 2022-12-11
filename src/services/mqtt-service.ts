@@ -24,7 +24,11 @@ export function handleMsgs(): void {
             try {
                 const doorProps: any = JSON.parse(msg);
                 const doorId: number = doorProps.id;
-                DoorService.modifyDoor(doorId, doorProps);
+                const isAutomatic = doorProps.isAutomatic
+                    ? doorProps.isAutomatic
+                    : false;
+                delete doorProps.isAutomatic;
+                DoorService.modifyDoor(doorId, doorProps, isAutomatic);
             } catch (e) {
                 console.log('Failed to update the door.');
             }
