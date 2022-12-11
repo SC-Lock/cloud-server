@@ -4,10 +4,11 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "node ./bin/app.js",
-        "build": "npm run copy-views && tsc",
+        "start": "npm run build && node ./bin/app.js",
+        "build": "npm run copy-views && npm run copy-public && tsc",
         "watch": "nodemon ./bin/app.js",
         "copy-views": "copyfiles -u 1 src/views/* bin",
+        "copy-public": "copyfiles -u 1 src/public/**/* bin",
         "watch-ts": "tsc --watch"
     },
     "keywords": [],
