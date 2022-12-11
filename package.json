@@ -1,18 +1,19 @@
 {
     "name": "server",
     "engines": {
-        "npm": ">=8.0.0 <9.0.0",
-        "node": ">=16.0.0 <17.0.0"
+        "node": "16.x"
     },
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
     "scripts": {
         "start": "npm run build && node ./bin/app.js",
-        "build": "npm run copy && tsc && yarn prisma migrate deploy",
+        "build": "tsc && npm run copy && npm run migrate && npm run seed",
         "copy": "npm run copy-views && npm run copy-public",
         "copy-views": "copyfiles -u 1 src/views/* bin",
         "copy-public": "copyfiles -u 1 src/public/**/* bin",
+        "migrate": "npm prisma migrate reset",
+        "seed": "npm prisma db seed",
         "watch": "nodemon ./bin/app.js",
         "watch-ts": "tsc --watch"
     },
