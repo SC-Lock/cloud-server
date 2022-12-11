@@ -8,11 +8,11 @@
     "main": "index.js",
     "scripts": {
         "start": "npm run build && node ./bin/app.js",
-        "build": "tsc && npm run copy && npm run migrate && npm run seed",
+        "build": "tsc && npm run copy && npm run migrate",
         "copy": "npm run copy-views && npm run copy-public",
         "copy-views": "copyfiles -u 1 src/views/* bin",
         "copy-public": "copyfiles -u 1 src/public/**/* bin",
-        "migrate": "npx prisma migrate reset",
+        "migrate": "npx prisma migrate deploy",
         "seed": "npx prisma db seed",
         "watch": "nodemon ./bin/app.js",
         "watch-ts": "tsc --watch"
