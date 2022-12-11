@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js" integrity="sha256-bC3LCZCwKeehY6T4fFi9VfOU0gztUa+S4cnkIhVPZ5E=" crossorigin="anonymous"></script>
-    <script src="/js/dashboard.js"></script>
+    <script type="module" src="/js/dashboard.js"></script>
     <title>Dashboard</title>
 </head>
 <body>
@@ -34,20 +34,15 @@
         </tr>
     </thead>
     <tbody>
-        <% for (let i = doorLogs.length - 1; i >= doorLogs.length - 10; i--) { %>
+        <% for (const doorLog of doorLogs.reverse().slice(0, 10)) { %>
             <tr>
-                <td><%= i + 1 %></td>
-                <td><%= doorLogs[i].isLocked %></td>
-                <td><%= doorLogs[i].isAutomatic %></td>
-                <td><%= doorLogs[i].createdAt %></td>
+                <td><%= doorLog.id %></td>
+                <td><%= doorLog.isLocked %></td>
+                <td><%= doorLog.isAutomatic %></td>
+                <td><%= doorLog.createdAt %></td>
             </tr>
         <% } %>
     </tbody>
 </table>
-
-<div>
-    <canvas id="test-chart">
-    </canvas>
-</div>
 </body>
 </html>
