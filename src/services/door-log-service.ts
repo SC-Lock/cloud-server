@@ -5,17 +5,20 @@ export async function retrieveDoorLogs(doorId: number) {
     return await SqliteDoorLogRepository.readDoorLogs(doorId);
 }
 
-function createDoorLogCreateObject(door: Door): DoorLogCreate {
+function createDoorLogCreateObject(
+    door: Door,
+    isAutomatic: boolean
+): DoorLogCreate {
     return {
         doorId: door.id,
         isLocked: door.isLocked,
-        isAutomatic: false,
+        isAutomatic: isAutomatic,
     };
 }
 
-export async function addDoorLog(door: Door) {
+export async function addDoorLog(door: Door, isAutomatic: boolean) {
     return await SqliteDoorLogRepository.createDoorLog(
-        createDoorLogCreateObject(door)
+        createDoorLogCreateObject(door, isAutomatic)
     );
 }
 

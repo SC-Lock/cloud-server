@@ -18,13 +18,19 @@ export function init(): void {
     handleMsgs();
 }
 
+function handleDoorTopicMsg(doorTopicMsg: string): void {
+    const doorProps: any = JSON.parse(doorTopicMsg);
+    const doorId: number = doorProps.id;
+    const isAutomatic = doorProps.isAutomatic ? doorProps.isAutomatic : false;
+    delete doorProps.isAutomatic;
+    DoorService.modifyDoor(doorId, doorProps, isAutomatic);
+}
+
 export function handleMsgs(): void {
     client.on(EVT_LISTEN, (topic: string, msg: string) => {
         if (topic === DOOR_TOPIC) {
             try {
-                const doorProps: any = JSON.parse(msg);
-                const doorId: number = doorProps.id;
-                DoorService.modifyDoor(doorId, doorProps);
+                handleDoorTopicMsg(msg);
             } catch (e) {
                 console.log('Failed to update the door.');
             }
