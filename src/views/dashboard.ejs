@@ -34,12 +34,12 @@
         </tr>
     </thead>
     <tbody>
-        <% for (let i = doorLogs.length - 1; i >= doorLogs.length - 10; i--) { %>
+        <% for (const doorLog of doorLogs.reverse().slice(0, 10)) { %>
             <tr>
-                <td><%= i + 1 %></td>
-                <td><%= doorLogs[i].isLocked %></td>
-                <td><%= doorLogs[i].isAutomatic %></td>
-                <td><%= doorLogs[i].createdAt %></td>
+                <td><%= doorLog.id %></td>
+                <td><%= doorLog.isLocked %></td>
+                <td><%= doorLog.isAutomatic %></td>
+                <td><%= doorLog.createdAt %></td>
             </tr>
         <% } %>
     </tbody>
