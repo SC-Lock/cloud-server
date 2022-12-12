@@ -21,8 +21,7 @@ export async function putDoor(req: Request, res: Response): Promise<void> {
         const doorProps = req.body;
         const updatedDoor = await DoorService.modifyDoor(
             Helpers.getDoorId(req),
-            doorProps,
-            false
+            doorProps
         );
         res.status(200).send(updatedDoor);
     } catch (e) {

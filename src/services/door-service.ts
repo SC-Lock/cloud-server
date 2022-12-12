@@ -5,17 +5,12 @@ export function retrieveDoor(doorId: number) {
     return SqliteDoorRepository.readDoor(doorId);
 }
 
-export async function modifyDoor(
-    doorId: number,
-    doorProps: any,
-    isAutomatic: boolean
-) {
+export async function modifyDoor(doorId: number, doorProps: any) {
     const updatedDoor = await SqliteDoorRepository.updateDoor(
         doorId,
         doorProps
     );
     MqttService.publishDoor(updatedDoor);
-    DoorLogService.addDoorLog(updatedDoor, isAutomatic);
     return updatedDoor;
 }
 

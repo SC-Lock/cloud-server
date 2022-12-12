@@ -1,6 +1,6 @@
 import { Door } from '../models';
 import { client } from '../mqtt';
-import { DoorService } from './index';
+import { DoorLogService, DoorService } from './index';
 
 const EVT_CONNECT = 'connect';
 const EVT_LISTEN = 'message';
@@ -18,12 +18,13 @@ export function init(): void {
     handleMsgs();
 }
 
-function handleDoorTopicMsg(doorTopicMsg: string): void {
+async function handleDoorTopicMsg(doorTopicMsg: string): Promise<void> {
     const doorProps: any = JSON.parse(doorTopicMsg);
     const doorId: number = doorProps.id;
     const isAutomatic = doorProps.isAutomatic ? doorProps.isAutomatic : false;
     delete doorProps.isAutomatic;
-    DoorService.modifyDoor(doorId, doorProps, isAutomatic);
+    const updatedDoor = await DoorService.modifyDoor(doorId, doorProps);
+    DoorLogService.addDoorLog(updatedDoor, isAutomatic);
 }
 
 export function handleMsgs(): void {
