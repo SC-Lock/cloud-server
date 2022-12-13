@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import path from 'path';
 import express from 'express';
+import cors from 'cors';
 
 import routers from './routers';
 import { MqttService } from './services';
@@ -9,6 +10,7 @@ const PORT = process.env.EXPRESS_PORT || 3000;
 
 const app = express();
 
+app.use(cors({ origin: '*' }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
