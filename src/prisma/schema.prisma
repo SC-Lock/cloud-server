@@ -14,6 +14,7 @@ model Door {
     id         Int       @id @default(autoincrement())
     unlockCode String
     isLocked   Boolean
+    isClosed   Boolean
     lockAt     String
     unlockAt   String
     doorLogs   DoorLog[]
@@ -24,6 +25,7 @@ model DoorLog {
     door        Door     @relation(fields: [doorId], references: [id])
     doorId      Int
     isLocked    Boolean
+    isOpen      Boolean
     isAutomatic Boolean
     createdAt   DateTime @default(now())
 }
