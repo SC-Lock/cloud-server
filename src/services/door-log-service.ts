@@ -12,6 +12,7 @@ function createDoorLogCreateObject(
     return {
         doorId: door.id,
         isLocked: door.isLocked,
+        isClosed: door.isClosed,
         isAutomatic: isAutomatic,
     };
 }
