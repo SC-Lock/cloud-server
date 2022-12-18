@@ -1,5 +1,5 @@
 import { SqliteDoorRepository } from '../data';
-import { DoorLogService, MqttService } from './index';
+import { MqttService } from './index';
 
 export function retrieveDoor(doorId: number) {
     return SqliteDoorRepository.readDoor(doorId);

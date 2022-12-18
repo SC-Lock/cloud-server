@@ -25,7 +25,7 @@ model DoorLog {
     door        Door     @relation(fields: [doorId], references: [id])
     doorId      Int
     isLocked    Boolean
-    isOpen      Boolean
+    isClosed      Boolean
     isAutomatic Boolean
     createdAt   DateTime @default(now())
 }
