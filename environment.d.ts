@@ -7,6 +7,7 @@ declare global {
             DB_FILE: string;
             MQTT_USERNAME: string;
             MQTT_PWD: string;
+            KEEP_ALIVE_INTERVAL: number;
         }
     }
 }
