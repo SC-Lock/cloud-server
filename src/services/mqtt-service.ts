@@ -16,6 +16,7 @@ let alive = true;
 let alreadyDead = false;
 
 function aliveHandler() {
+    console.info(alive);
     if (!alive && !alreadyDead) {
         publishConnectionLoss();
         alreadyDead = true;
@@ -27,7 +28,7 @@ export function init(): void {
     client.on(EVT_CONNECT, () => {
         console.info('App is connected to MQTT broker.');
         client.subscribe([DOOR_TOPIC, KEEP_ALIVE_TOPIC], () => {
-            console.info(`App is subscribed to topic ${DOOR_TOPIC}.`);
+            console.info('App is subscribed to the topics.');
         });
     });
 
