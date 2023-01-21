@@ -38,22 +38,24 @@ export function init(): void {
 }
 
 async function handleDoorTopicMsg(doorTopicMsg: string): Promise<void> {
-    const doorProps: any = JSON.parse(doorTopicMsg);
-    const doorId: number = doorProps.id;
-    const isAutomatic = doorProps.isAutomatic ? doorProps.isAutomatic : false;
-    delete doorProps.isAutomatic;
-    const updatedDoor = await DoorService.modifyDoor(doorId, doorProps);
-    DoorLogService.addDoorLog(updatedDoor, isAutomatic);
+    try {
+        const doorProps: any = JSON.parse(doorTopicMsg);
+        const doorId: number = doorProps.id;
+        const isAutomatic = doorProps.isAutomatic
+            ? doorProps.isAutomatic
+            : false;
+        delete doorProps.isAutomatic;
+        const updatedDoor = await DoorService.modifyDoor(doorId, doorProps);
+        DoorLogService.addDoorLog(updatedDoor, isAutomatic);
+    } catch (e) {
+        console.log('Failed to update the door.');
+    }
 }
 
 export function handleMsgs(): void {
     client.on(EVT_LISTEN, (topic: string, msg: string) => {
         if (topic === DOOR_TOPIC) {
-            try {
-                handleDoorTopicMsg(msg);
-            } catch (e) {
-                console.log('Failed to update the door.');
-            }
+            handleDoorTopicMsg(msg);
         } else if (topic === KEEP_ALIVE_TOPIC) {
             alive = true;
             alreadyDead = false;
