@@ -5,7 +5,7 @@
     },
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
+    "main": "./bin/app.js",
     "scripts": {
         "start": "npm run build && node ./bin/app.js",
         "build": "tsc && npm run copy && npm run migrate",
